@@ -1,0 +1,21 @@
+{
+  "name": "mobilecamera",
+  "version": "1.0.0",
+  "description": "Simple app that includes Camera API. Trying it on mobile though",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webapi",
+    "camera",
+    "mobile",
+    "ssl",
+    "tls"
+  ],
+  "author": "Me",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
