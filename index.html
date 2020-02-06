@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>
-        Simple Camera
+      Simple Camera
     </title>
-</head>
-<body>
+    <style>
+      .displayNone {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
     <video src="" id="camera"></video>
+    <div id="infoDiv">
+      <div id="videoInfo" class="displayNone">
+        This text is visible when navigator.getUserMedia doesn't exist
+      </div>
+    </div>
     <script>
-        const camera = document.querySelector('video#camera')
-        
-        var cameraWidth = 420
-        var cameraHeight = 360
+      const camera = document.querySelector("video#camera");
 
-        const constraints = {video: {width: cameraWidth, height: cameraHeight}, audio: false}
+      var cameraWidth = 420;
+      var cameraHeight = 360;
 
-        navigator.getUserMedia(constraints, stream => {
-            camera.srcObject = stream
-            camera.width = cameraWidth
-            camera.height = cameraHeight
-            camera.onloadeddata = () => camera.play()
-        }, err => console.error(error))
+      const constraints = {
+        video: { width: cameraWidth, height: cameraHeight },
+        audio: false
+      };
 
+      if (navigator.getUserMedia) {
+        navigator.getUserMedia(
+          constraints,
+          stream => {
+            camera.srcObject = stream;
+            camera.width = cameraWidth;
+            camera.height = cameraHeight;
+            camera.onloadeddata = () => camera.play();
+          },
+          err =>
+            (document.querySelector(
+              "div#infoDiv"
+            ).innerHTML += `Error: ${err}<br>`)
+        );
+      } else {
+        document.querySelector("div#videoInfo").classList.toggle("displayNone");
+      }
     </script>
-</body>
+  </body>
 </html>
